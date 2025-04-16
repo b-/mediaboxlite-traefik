@@ -1,16 +1,29 @@
 api:
-  insecure: true
-
+  dashboard: true # Optional can be disabled
+  insecure: true # Optional can be disabled
+  debug: false # Optional can be Enabled if needed for troubleshooting 
 entryPoints:
-  web:
-    address: ":80"
-
-  websecure:
-    address: ":443"
-
   ssh:
     address: ":222"
-
+  web:
+    address: ":80"
+  websecure:
+    address: ":443"
+serversTransport:
+  insecureSkipVerify: true
 providers:
   docker:
     endpoint: "unix:///var/run/docker.sock"
+    exposedByDefault: false
+    network: frontend # Optional; Only use the "proxy" Docker network, even if containers are on multiple networks.
+certificatesResolvers:
+  letencrypt:
+    acme:
+      email: letsencrypt@ibeep.com
+      storage: /certs/acme.json
+      #caServer: https://acme-v02.api.letsencrypt.org/directory # production (default)
+      caServer: https://acme-staging-v02.api.letsencrypt.org/directory # staging
+      dnsChallenge:
+        provider: cloudflare
+        delayBeforeCheck: 10 #Optional to wait x second before checking with the DNS Server
+
