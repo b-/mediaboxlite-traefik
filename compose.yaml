@@ -16,7 +16,7 @@ services:
       - "8081:8080"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
-      - "/var/srv/traefik/traefik.yml:/traefik.yml:ro"
+      - "./traefik.yml:/traefik.yml:ro"
 
   whoami:
     image: "traefik/whoami"
