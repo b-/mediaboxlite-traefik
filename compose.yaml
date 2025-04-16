@@ -19,6 +19,7 @@ services:
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
       - "./traefik.yml:/traefik.yml:ro"
+      - "./certs:/certs"
 
   whoami:
     image: "traefik/whoami"
