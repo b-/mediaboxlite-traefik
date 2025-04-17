@@ -1,49 +1,48 @@
-version: "3.3"
-
+---
 networks:
   default:
     name: traefik
     driver: bridge
     attachable: true
-
-
 services:
-
   traefik:
-    image: "traefik:v3.3"
-    container_name: "traefik"
+    image: traefik:v3.3
+    container_name: traefik
     command:
-      #- "--log.level=DEBUG"
-      - "--api.dashboard=true"
-      - "--api.insecure=true"
-      - "--api.debug=false"
-      - "--entryPoints.web.address=:80"
-      - "--entryPoints.websecure.address=:443"
-      - "--entryPoints.ssh.address=:222"
-      - "--serversTransport.insecureSkipVerify=true"
-      - "--providers.docker=true"
-      - "--providers.docker.exposedbydefault=false"
-      - "--certificatesResolvers.letsencrypt.acme.email=letsencrypt@ibeep.com"
-      - "--certificatesResolvers.letencrypt.acme.email=letsencrypt@ibeep.com"
-      - "--certificatesResolvers.letencrypt.acme.storage=/certs/acme.json"
-      - "--certificatesResolvers.letencrypt.acme.caServer=https://acme-v02.api.letsencrypt.org/directory" # production (default)
+      - --api.dashboard=true
+      - --api.insecure=true
+      - --api.debug=false
+      - --entryPoints.web.address=:80
+      - --entryPoints.websecure.address=:443
+      - --entryPoints.ssh.address=:222
+      - --serversTransport.insecureSkipVerify=true
+      - --providers.docker=true
+      - --providers.docker.exposedbydefault=false
+      - --certificatesResolvers.letsencrypt.acme.email=letsencrypt@ibeep.com
+      - --certificatesResolvers.letencrypt.acme.email=letsencrypt@ibeep.com
+      - --certificatesResolvers.letencrypt.acme.storage=/certs/acme.json
+      - --certificatesResolvers.letencrypt.acme.caServer=https://acme-v02.api.letsencrypt.org/directory
+      - --certificatesResolvers.letencrypt.acme.dnsChallenge.provider=cloudflare
+      - --certificatesResolvers.letencrypt.acme.dnsChallenge.delayBeforeCheck=10
       # - "--certificatesResolvers.letencrypt.acme.caServer=https://acme-staging-v02.api.letsencrypt.org/directory" # staging
-      - "--certificatesResolvers.letencrypt.acme.dnsChallenge.provider=cloudflare"
-      - "--certificatesResolvers.letencrypt.acme.dnsChallenge.delayBeforeCheck=10" #Optional to wait x second before checking with the DNS Server
     ports:
-      - "80:80"
-      - "8081:8080"
+      - 80:80
+      - 8081:8080
     extra_hosts:
-      - "host.docker.internal:host-gateway" 
+      - host.docker.internal:host-gateway
     volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock:ro"
-      - "./certs:/certs"
-
-  whoami:
-    image: "traefik/whoami"
-    container_name: "simple-service"
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./certs:/certs
     labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.whoami.rule=HostRegexp(`^mediaboxlite\..*$`)"
-      - "traefik.http.routers.whoami.entrypoints=web"
+      - traefik.enable=true
+      - traefik.http.routers.traefik.rule=HostRegexp(`^traefik\\..*$`)
+      - traefik.http.routers.traefik.entrypoints=web
+      - traefik.http.services.traefik.loadbalancer.server.port=8080
+  whoami:
+    image: traefik/whoami
+    container_name: simple-service
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.whoami.rule=HostRegexp(`^mediaboxlite\\..*$`)
+      - traefik.http.routers.whoami.entrypoints=web
 
