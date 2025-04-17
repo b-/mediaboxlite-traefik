@@ -41,7 +41,7 @@ services:
       - host.docker.internal:host-gateway
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ./certs:/certs
+      - certs:/certs
     labels:
       traefik.enable: true
       traefik.http.routers.traefik.rule: HostRegexp(`^traefik\.mediaboxlite(?:\..*)*$`)
