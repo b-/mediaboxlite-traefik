@@ -27,7 +27,7 @@ services:
       - "--certificatesResolvers.letencrypt.acme.email=letsencrypt@ibeep.com"
       - "--certificatesResolvers.letencrypt.acme.storage=/certs/acme.json"
       - "--certificatesResolvers.letencrypt.acme.caServer=https://acme-v02.api.letsencrypt.org/directory" # production (default)
-      - "--certificatesResolvers.letencrypt.acme.caServer=https://acme-staging-v02.api.letsencrypt.org/directory" # staging
+      # - "--certificatesResolvers.letencrypt.acme.caServer=https://acme-staging-v02.api.letsencrypt.org/directory" # staging
       - "--certificatesResolvers.letencrypt.acme.dnsChallenge.provider=cloudflare"
       - "--certificatesResolvers.letencrypt.acme.dnsChallenge.delayBeforeCheck=10" #Optional to wait x second before checking with the DNS Server
     ports:
@@ -44,6 +44,6 @@ services:
     container_name: "simple-service"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.whoami.rule=Host(`mediaboxlite.shark-perch.ts.net`)"
+      - "traefik.http.routers.whoami.rule=HostRegexp(`^mediaboxlite\..*$`)"
       - "traefik.http.routers.whoami.entrypoints=web"
 
