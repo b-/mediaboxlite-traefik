@@ -18,7 +18,7 @@ services:
       - --api.debug=false
       - --entryPoints.web.address=:80
       - --entryPoints.web.asDefault=true
-      - --entryPoints.websecure.address=:6443
+      - --entryPoints.websecure.address=:443
       - --entryPoints.websecure.asDefault=true
       - --entrypoints.websecure.http.tls=true
       - --entrypoints.websecure.http.tls.certResolver=leresolver
@@ -36,7 +36,7 @@ services:
     ports:
       - 80:80
       - 8081:8080
-      - 6443:6443
+      - 443:443
     extra_hosts:
       - host.docker.internal:host-gateway
     volumes:
