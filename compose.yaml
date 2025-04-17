@@ -40,7 +40,11 @@ services:
     extra_hosts:
       - host.docker.internal:host-gateway
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - type: bind
+        source: /var/run/docker.sock
+        #source: /var/run/docker.sock:/var/run/docker.sock:ro
+        target: /var/run/docker.sock
+        read_only: true
       - certs:/certs
     labels:
       traefik.enable: true
@@ -53,3 +57,5 @@ services:
       traefik.enable: true
       traefik.http.routers.whoami.rule: HostRegexp(`^(?:whoami\.)?mediaboxlite(?:\..*)*$`)
       #traefik.http.routers.whoami.entrypoints: web
+volumes:
+  certs:
