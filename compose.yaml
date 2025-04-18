@@ -23,7 +23,7 @@ services:
       - --entrypoints.websecure.http.tls=true
       - --entrypoints.websecure.http.tls.certResolver=leresolver
       - --entrypoints.websecure.http.tls.domains[0].main=mediaboxlite.ibeep.com
-      - --entrypoints.websecure.http.tls.domains[0].sans=*.mediaboxlite.ibeep.com
+      - --entrypoints.websecure.http.tls.domains[0].sans=*.mediaboxlite.ibeep.com,*.mediaboxlite.ts.ibeep.com,*.mediaboxlite.lan.ibeep.com,*.mediaboxlite.home.ibeep.com
       - --entryPoints.ssh.address=:222
       - --serversTransport.insecureSkipVerify=true
       - --providers.docker=true
