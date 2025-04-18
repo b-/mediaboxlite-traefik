@@ -6,6 +6,7 @@ networks:
     attachable: true
 services:
   traefik:
+    restart: unless-stopped
     environment:
       CF_DNS_API_TOKEN: "${CF_DNS_API_TOKEN}"
     image: traefik:v3.3
