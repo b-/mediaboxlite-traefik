@@ -48,6 +48,7 @@ services:
         read_only: true
       - certs:/certs
     labels:
+      komodo.skip: # Prevent Komodo from stopping with StopAllContainers
       traefik.enable: true
       traefik.http.routers.traefik.rule: HostRegexp(`^traefik\.mediaboxlite(?:\..*)*$`)
       traefik.http.services.traefik.loadbalancer.server.port: 8080
@@ -58,5 +59,31 @@ services:
       traefik.enable: true
       traefik.http.routers.whoami.rule: HostRegexp(`^(?:whoami\.)?mediaboxlite(?:\..*)*$`)
       #traefik.http.routers.whoami.entrypoints: web
+  upnp-service:
+    image: ghcr.io/projectinitiative/upnp-service:latest
+    network_mode: "host"
+    #container_name: upnp-service
+    restart: unless-stopped
+    configs:
+      - source: upnp
+        target: /etc/upnp-service/upnp.json
 volumes:
   certs:
+
+configs:
+  upnp:
+    # /etc/upnp-service/upnp.json
+    content: |
+      {
+          "apps":
+          [
+              {
+                  "app_name": "traefik",
+                  "redirections": [
+                      ["443", "TCP"],
+                      ["443", "UDP"],
+                      ["80", "TCP"]
+                  ]
+              }
+        ]
+      }
