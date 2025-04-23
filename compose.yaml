@@ -53,8 +53,8 @@ services:
       traefik.http.routers.traefik.rule: HostRegexp(`^traefik\.mediaboxlite(?:\..*)*$`)
       traefik.http.services.traefik.loadbalancer.server.port: 8080
       traefik.http.routers.spyder.rule: HostRegexp(`^spyder\.mediaboxlite(?:\..*)*$`)
-      traefik.http.services.spyder.loadbalancer.server.address: 192.168.12.250
-      traefik.http.services.spyder.loadbalancer.server.port: 80
+      traefik.http.services.spyder.loadbalancer.server.address: 192.168.12.250:80
+      #traefik.http.services.spyder.loadbalancer.server.port: 80
   whoami:
     image: traefik/whoami
     container_name: simple-service
