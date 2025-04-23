@@ -52,7 +52,7 @@ services:
       traefik.enable: true
       traefik.http.routers.traefik.rule: HostRegexp(`^traefik\.mediaboxlite(?:\..*)*$`)
       traefik.http.routers.spyder.rule: HostRegexp(`^spyder\.mediaboxlite(?:\..*)*$`)
-      traefik.http.services.spyder.servers.url: "http://192.168.12.250/"
+      traefik.http.services.spyder.loadbalancer.servers.url: "http://192.168.12.250/"
       traefik.http.services.traefik.loadbalancer.server.port: 8080
   whoami:
     image: traefik/whoami
