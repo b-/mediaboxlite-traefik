@@ -9,7 +9,7 @@ services:
     restart: unless-stopped
     environment:
       CF_DNS_API_TOKEN: "${CF_DNS_API_TOKEN}"
-    image: traefik:v3.3
+    image: traefik:v3.4
     container_name: traefik
     command:
       # - --log.format=json
@@ -58,6 +58,7 @@ services:
     labels:
       traefik.enable: true
       traefik.http.routers.whoami.rule: HostRegexp(`^(?:whoami\.)?mediaboxlite(?:\..*)*$`)
+    restart: unless-stopped
       #traefik.http.routers.whoami.entrypoints: web
   upnp-service:
     image: ghcr.io/projectinitiative/upnp-service:latest
