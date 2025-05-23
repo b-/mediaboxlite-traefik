@@ -2,8 +2,9 @@
 networks:
   default:
     name: traefik
-    driver: bridge
-    attachable: true
+    #driver: bridge
+    #attachable: true
+    external: true
 services:
   traefik:
     restart: unless-stopped
@@ -58,7 +59,8 @@ services:
     labels:
       traefik.enable: true
       traefik.http.routers.whoami.rule: HostRegexp(`^(?:whoami\.)?mediaboxlite(?:\..*)*$`)
-    restart: unless-stopped
+    restart:
+      unless-stopped
       #traefik.http.routers.whoami.entrypoints: web
   upnp-service:
     image: ghcr.io/projectinitiative/upnp-service:latest
