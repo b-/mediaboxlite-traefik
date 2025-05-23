@@ -1,5 +1,5 @@
 [[stack]]
-name = "traefik"
+name = "mediaboxlite-traefik"
 tags = ["mediaboxlite-traefik"]
 [stack.config]
 server = "mediaboxlite"
