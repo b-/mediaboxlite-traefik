@@ -17,7 +17,7 @@ CF_DNS_API_TOKEN = [[OP__KOMODO__CLOUDFLARE_APIKEY_TRAEFIK__CREDENTIAL]]
 ##
 
 [[resource_sync]]
-name = "mediabox-traefik"
+name = "mediaboxlite-traefik"
 tags = ["mediaboxlite-traefik"]
 [resource_sync.config]
 repo = "b-/mediaboxlite-traefik"
