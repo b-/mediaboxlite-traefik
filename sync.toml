@@ -1,1 +1,28 @@
-## Add resources to get started
+[[stack]]
+name = "traefik"
+tags = ["mediaboxlite-traefik"]
+[stack.config]
+server = "mediaboxlite"
+poll_for_updates = true
+auto_update = true
+auto_update_all_services = true
+git_account = "b-"
+repo = "b-/mediaboxlite-traefik"
+reclone = true
+environment = """
+CF_API_EMAIL = [[CF_API_EMAIL]]
+CF_DNS_API_TOKEN = [[CF_DNS_API_TOKEN]]
+"""
+
+##
+
+[[resource_sync]]
+name = "mediabox-traefik"
+tags = ["mediaboxlite-traefik"]
+[resource_sync.config]
+repo = "b-/mediaboxlite-traefik"
+git_account = "b-"
+resource_path = ["sync.toml"]
+managed = true
+delete = true
+match_tags = ["mediaboxlite-traefik"]
