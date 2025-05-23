@@ -10,8 +10,8 @@ git_account = "b-"
 repo = "b-/mediaboxlite-traefik"
 reclone = true
 environment = """
-CF_API_EMAIL = [[CF_API_EMAIL]]
-CF_DNS_API_TOKEN = [[CF_DNS_API_TOKEN]]
+CF_API_EMAIL = [[OP__KOMODO__CLOUDFLARE_APIKEY_TRAEFIK__EMAIL]]
+CF_DNS_API_TOKEN = [[OP__KOMODO__CLOUDFLARE_APIKEY_TRAEFIK__CREDENTIAL]]
 """
 
 ##
