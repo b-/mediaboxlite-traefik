@@ -6,9 +6,18 @@ server = "mediaboxlite"
 poll_for_updates = true
 auto_update = true
 auto_update_all_services = true
+destroy_before_deploy = true
 git_account = "b-"
 repo = "b-/mediaboxlite-traefik"
 reclone = true
+file_paths = [
+  "log-tail.compose.yaml",
+  "logdy.compose.yaml",
+  "logrotate.compose.yaml",
+  "redis-kop.compose.yaml",
+  "traefik.compose.yaml",
+  "upnp.compose.yaml"
+]
 environment = """
 CF_API_EMAIL = [[OP__KOMODO__CLOUDFLARE_APIKEY_TRAEFIK__EMAIL]]
 CF_DNS_API_TOKEN = [[OP__KOMODO__CLOUDFLARE_APIKEY_TRAEFIK__CREDENTIAL]]
@@ -16,14 +25,6 @@ TRAEFIK_DOCKER_NETWORK=traefik
 TRAEFIK_RULE_PREFIX=[[OP__KOMODO__TRAEFIK__RULE_PREFIX]]
 TRAEFIK_RULE_SUFFIX=[[OP__KOMODO__TRAEFIK__RULE_SUFFIX]]
 """
-file_paths = [
-    "log-tail.compose.yaml",
-    "logdy.compose.yaml",
-    "logrotate.compose.yaml",
-    "redis-kop.compose.yaml",
-    "traefik.compose.yaml",
-    "upnp.compose.yaml",
-]
 
 ##
 
