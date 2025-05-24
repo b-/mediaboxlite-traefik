@@ -58,7 +58,7 @@ services:
     labels:
       - komodo.skip=true # Prevent Komodo from stopping with StopAllContainers
       - traefik.enable=true
-      - "traefik.http.routers.traefik.rule=HostRegexp(`^traefik${TRAEFIK_RULE_SUFFIX}"
+      - "traefik.http.routers.traefik.rule=${TRAEFIK_RULE_PREFIX}traefik${TRAEFIK_RULE_SUFFIX}"
       - traefik.http.services.traefik.loadbalancer.server.port=8080
   whoami:
     image: traefik/whoami
