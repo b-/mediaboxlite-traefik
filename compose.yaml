@@ -64,8 +64,8 @@ services:
     image: traefik/whoami
     container_name: simple-service
     labels:
-      traefik.enable: true
-      traefik.http.routers.whoami.rule: HostRegexp(`^(?:whoami\.)?mediaboxlite(?:\..*)*$`)
+      - traefik.enable=true
+      - "traefik.http.routers.whoami.rule=${TRAEFIK_RULE_PREFIX}whoami${TRAEFIK_RULE_SUFFIX}"
     restart:
       unless-stopped
       #traefik.http.routers.whoami.entrypoints: web
