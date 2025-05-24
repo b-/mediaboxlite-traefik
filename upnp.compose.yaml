@@ -1,0 +1,27 @@
+configs:
+  upnp:
+    # /etc/upnp-service/upnp.json
+    content: |
+      {
+          "apps":
+          [
+              {
+                  "app_name": "traefik",
+                  "redirections": [
+                      ["443", "TCP"],
+                      ["443", "UDP"],
+                      ["80", "TCP"]
+                  ]
+              }
+        ]
+      }
+
+services:
+  upnp-service:
+    image: ghcr.io/projectinitiative/upnp-service:latest
+    network_mode: "host"
+    #container_name: upnp-service
+    restart: unless-stopped
+    configs:
+      - source: upnp
+        target: /etc/upnp-service/upnp.json

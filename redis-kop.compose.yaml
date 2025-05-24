@@ -1,0 +1,19 @@
+networks:
+  kop_net:
+    external: true
+
+services:
+  traefik-internal-redis:
+    restart: always
+    image: redis:7-alpine
+    container_name: traefik-internal-redis
+    networks:
+      - default
+      - kop_net
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+    volumes:
+      - traefik_redis:/data
+
+volumes:
+  traefik_redis:

@@ -16,6 +16,14 @@ TRAEFIK_DOCKER_NETWORK=traefik
 TRAEFIK_RULE_PREFIX=[[OP__KOMODO__TRAEFIK__RULE_PREFIX]]
 TRAEFIK_RULE_SUFFIX=[[OP__KOMODO__TRAEFIK__RULE_SUFFIX]]
 """
+file_paths = [
+    "log-tail.compose.yaml",
+    "logdy.compose.yaml",
+    "logrotate.compose.yaml",
+    "redis-kop.compose.yaml",
+    "traefik.compose.yaml",
+    "upnp.compose.yaml",
+]
 
 ##
 

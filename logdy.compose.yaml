@@ -1,0 +1,37 @@
+volumes:
+  traefik_logs:
+configs:
+  logdy.json:
+    file: ./logdy/logdy.json
+services:
+  logdy:
+    build:
+      context: https://github.com/logdyhq/logdy-core.git
+    read_only: true
+    networks:
+      - default
+      - traefik_internal
+    volumes:
+      - traefik_logs:/var/log:ro
+    configs:
+      - source: logdy.json
+        target: /config/logdy.json
+    command:
+      - "--config"
+      - "/config/logdy.json"
+      - "follow"
+      #- "--full-read"
+      - "/var/log/access.log"
+    restart: unless-stopped
+    # ports:
+    #   - "8333:8080"
+    security_opt:
+      - no-new-privileges=true
+    labels:
+      traefik.enable: true
+      traefik.http.routers.logdy-traefik-internal.rule: Host(`traefik-log-internal.CHANGEME.casa`)
+      traefik.http.services.logdy-traefik-internal.loadbalancer.server.port: 8080
+      homepage.group: Monitoring
+      homepage.name: Traefik Logs (Internal)
+      homepage.icon: https://cdn.jsdelivr.net/gh/selfhst/icons/png/logdy.png
+      homepage.href: "https://traefik-log-internal.CHANGEME.casa"

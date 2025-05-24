@@ -1,0 +1,54 @@
+networks:
+  default:
+    name: traefik
+    external: true
+  traefik_internal: null
+
+services:
+  traefik:
+    restart: unless-stopped
+    environment:
+      CF_DNS_API_TOKEN: "${CF_DNS_API_TOKEN}"
+    image: traefik:v3.4
+    container_name: traefik
+    networks:
+      - traefik_internal
+      - kop_net
+      - default
+    ports:
+      - 80:80
+      - 8081:8080
+      - 443:443
+      - 222:222
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    volumes:
+      - ./configs/traefik/static:/etc/traefik:rw
+      - ./configs/traefik/dynamic:/config/dynamic:rw
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - certs:/certs:rw
+      - traefik_logs:/var/log/traefik:rw # folder containing access.log file
+    labels:
+      - komodo.skip=true # Prevent Komodo from stopping with StopAllContainers
+      - traefik.enable=true
+      - "traefik.http.routers.traefik-dashboard-internal.rule=${TRAEFIK_RULE_PREFIX}traefik-internal${TRAEFIK_RULE_SUFFIX}"
+      - traefik.http.services.traefik-dashboard-internal.service=api@internal
+      - homepage.group=Monitoring
+      - homepage.name=Traefik (Internal)
+      - homepage.icon=https://cdn.jsdelivr.net/gh/selfhst/icons/png/traefik.png
+      - homepage.href=https://traefik-internal.mediaboxlite.ibeep.com
+
+  whoami:
+    image: traefik/whoami
+    networks:
+      - traefik_internal
+    container_name: simple-service
+    labels:
+      - traefik.enable=true
+      - "traefik.http.routers.whoami.rule=${TRAEFIK_RULE_PREFIX}whoami${TRAEFIK_RULE_SUFFIX}"
+    restart:
+      unless-stopped
+      #traefik.http.routers.whoami.entrypoints: web
+volumes:
+  traefik_logs:
+  certs:

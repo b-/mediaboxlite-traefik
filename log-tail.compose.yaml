@@ -1,0 +1,11 @@
+services:
+  traefik-access-logs:
+    image: alpine
+    volumes:
+      - traefik_logs:/var/log:ro
+    command: >
+      sh -c "tail -F /var/log/access.log"
+    network_mode: none
+    restart: unless-stopped
+volumes:
+  traefik_logs:
