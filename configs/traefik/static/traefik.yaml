@@ -31,7 +31,7 @@ providers:
     exposedByDefault: false
   redis:
     endpoints:
-      - redis://traefik-internal-redis:6379
+      - traefik-internal-redis:6379
   file:
     directory: "/config/dynamic"
     watch: true
