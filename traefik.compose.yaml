@@ -23,11 +23,11 @@ services:
     extra_hosts:
       - host.docker.internal:host-gateway
     volumes:
-      - ./configs/traefik/static:/etc/traefik:rw
-      - ./configs/traefik/dynamic:/config/dynamic:rw
+      - ./configs/traefik/static:/etc/traefik:z
+      - ./configs/traefik/dynamic:/config/dynamic:z
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - certs:/certs:rw
-      - traefik_logs:/var/log/traefik:rw # folder containing access.log file
+      - certs:/certs:z
+      - traefik_logs:/var/log/traefik:z # folder containing access.log file
     labels:
       - komodo.skip=true # Prevent Komodo from stopping with StopAllContainers
       - traefik.enable=true

@@ -4,7 +4,7 @@ services:
     network_mode: none
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:rw # required to send USR1 signal to Traefik after log rotation
-      - traefik_logs:/var/log/traefik:rw # folder containing access.log file
+      - traefik_logs:/var/log/traefik:z # folder containing access.log file
     environment:
       TZ: "America/New_York"
       # all environment variables are optional and show the default values:
