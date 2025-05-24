@@ -2,7 +2,7 @@ volumes:
   traefik_logs:
 configs:
   logdy.json:
-    file: ./logdy/logdy.json
+    file: ./configs/logdy/logdy.json
 services:
   logdy:
     build:
