@@ -32,7 +32,7 @@ services:
       - komodo.skip=true # Prevent Komodo from stopping with StopAllContainers
       - traefik.enable=true
       - "traefik.http.routers.traefik-dashboard-internal.rule=${TRAEFIK_RULE_PREFIX}traefik-internal${TRAEFIK_RULE_SUFFIX}"
-      - traefik.http.services.traefik-dashboard-internal.service=api@internal
+      - traefik.http.routers.traefik-dashboard-internal.service=api@internal
       - homepage.group=Monitoring
       - homepage.name=Traefik (Internal)
       - homepage.icon=https://cdn.jsdelivr.net/gh/selfhst/icons/png/traefik.png
