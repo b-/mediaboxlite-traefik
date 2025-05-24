@@ -75,6 +75,11 @@ services:
     restart: always
     container_name: traefik_internal_redis
     image: redis:7-alpine
+    networks:
+      - default
+      - kop_net
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
     volumes:
       - traefik_redis:/data
 
