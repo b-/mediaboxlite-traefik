@@ -33,6 +33,8 @@ services:
     environment:
       <<: *ts-env
       TS_HOSTNAME: "traefik"
+    extra_hosts:
+      - host.docker.internal=host-gateway
     ports:
       - 80:80
       - 8081:8080
@@ -40,8 +42,9 @@ services:
       - 222:222
   traefik:
     network_mode: service:traefik-ts
-    networks: !reset
-    ports: !reset
+    networks: !reset null
+    ports: !reset null
+    extra_hosts: !reset null
   traefik-internal-redis-ts:
     <<: *ts-sidecar
     environment:
@@ -49,7 +52,7 @@ services:
       TS_HOSTNAME: "traefik-internal-redis"
   traefik-internal-redis:
     network_mode: service:traefik-internal-redis-ts
-    networks: !reset
+    networks: !reset null
   logdy-ts:
     <<: *ts-sidecar
     environment:
@@ -57,4 +60,4 @@ services:
       TS_HOSTNAME: "logdy"
   logdy:
     network_mode: service:logdy-ts
-    networks: !reset
+    networks: !reset null
