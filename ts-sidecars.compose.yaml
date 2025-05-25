@@ -59,9 +59,14 @@ services:
     environment:
       <<: *ts-env
       TS_HOSTNAME: "logdy-traefik-internal"
+    labels:
+      - traefik.enable=true
+      - "traefik.http.routers.whoami.rule=${TRAEFIK_RULE_PREFIX}whoami${TRAEFIK_RULE_SUFFIX}"
+      - traefik.http.services.whoami-internal.loadbalancer.server.port=80
   logdy:
     network_mode: service:logdy-ts
     networks: !reset null
+    labels: ["traefik.enable=false"]
 
   whoami-ts:
     <<: *ts-sidecar
@@ -76,7 +81,7 @@ services:
       TS_HOSTNAME: "whoami"
   whoami:
     network_mode: service:whoami-ts
-    labels: !reset null
+    labels: ["traefik.enable=false"]
     ports: !reset null
     extra_hosts: !reset null
     networks: !reset null
