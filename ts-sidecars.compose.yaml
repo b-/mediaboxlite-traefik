@@ -62,3 +62,20 @@ services:
   logdy:
     network_mode: service:logdy-ts
     networks: !reset null
+
+  whoami-ts:
+    <<: *ts-sidecar
+    #ports:
+    #- "80:80"
+    labels:
+      - traefik.enable=true
+      - "traefik.http.routers.whoami.rule=${TRAEFIK_RULE_PREFIX}whoami${TRAEFIK_RULE_SUFFIX}"
+    environment:
+      <<: *ts-env
+      TS_HOSTNAME: "whoami"
+  whoami:
+    network_mode: service:whoami-ts
+    labels: !reset null
+    ports: !reset null
+    extra_hosts: !reset null
+    networks: !reset null

@@ -52,9 +52,9 @@ services:
     labels:
       - komodo.skip=true # Prevent Komodo from stopping with StopAllContainers
       - traefik.enable=true
-      #- 'traefik.http.routers.traefik-dashboard-internal.rule=${TRAEFIK_RULE_PREFIX}traefik-internal${TRAEFIK_RULE_SUFFIX}'
-      - 'traefik.http.routers.traefik-dashboard-internal.rule=HostRegexp(`^traefik-internal\..*$`)'
-      - traefik.http.routers.traefik-dashboard-internal.service=api@internal
+      - "traefik.http.routers.traefik-internal.rule=${TRAEFIK_RULE_PREFIX}traefik-internal${TRAEFIK_RULE_SUFFIX}"
+      #- "traefik.http.routers.traefik-internal.service=api@internal"
+      - traefik.http.services.traefik-internal.loadbalancer.server.port=8080
       - homepage.group=Monitoring
       - homepage.name=Traefik (Internal)
       - homepage.icon=https://cdn.jsdelivr.net/gh/selfhst/icons/png/traefik.png
@@ -67,7 +67,7 @@ services:
     container_name: simple-service
     labels:
       - traefik.enable=true
-      - 'traefik.http.routers.whoami.rule=HostRegexp(`^whoami\..*$`)'
+      - "traefik.http.routers.whoami.rule=${TRAEFIK_RULE_PREFIX}whoami${TRAEFIK_RULE_SUFFIX}"
     restart:
       unless-stopped
       #traefik.http.routers.whoami.entrypoints: web

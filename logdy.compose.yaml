@@ -26,10 +26,11 @@ services:
     security_opt:
       - no-new-privileges=true
     labels:
-      traefik.enable: true
-      traefik.http.routers.logdy-traefik-internal.rule: "[[OP__KOMODO__TRAEFIK__RULE_PREFIX]]logdy-traefik-internal[[OP__KOMODO__TRAEFIK__RULE_SUFFIX]]"
-      traefik.http.services.logdy-traefik-internal.loadbalancer.server.port: 8080
-      homepage.group: Monitoring
-      homepage.name: Traefik Logs (Internal)
-      homepage.icon: https://cdn.jsdelivr.net/gh/selfhst/icons/png/logdy.png
-      homepage.href: "https://traefik-log-internal.CHANGEME.casa"
+      - traefik.enable=true
+      #traefik.http.routers.logdy-traefik-internal.rule: "[[OP__KOMODO__TRAEFIK__RULE_PREFIX]]logdy-traefik-internal[[OP__KOMODO__TRAEFIK__RULE_SUFFIX]]"
+      - "traefik.http.routers.logdy-traefik-internal.rule=${TRAEFIK_RULE_PREFIX}logdy-traefik-internal${TRAEFIK_RULE_SUFFIX}"
+      - traefik.http.services.logdy-traefik-internal.loadbalancer.server.port=8080
+      - homepage.group=Monitoring
+      - homepage.name=Traefik Logs (Internal)
+      - homepage.icon=https://cdn.jsdelivr.net/gh/selfhst/icons/png/logdy.png
+      - homepage.href="https://traefik-log-internal.CHANGEME.casa"
