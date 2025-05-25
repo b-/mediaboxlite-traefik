@@ -1,6 +1,6 @@
 networks:
   kop_net:
-    external: true
+    #external: true
 
 services:
   traefik-internal-redis:
@@ -9,7 +9,7 @@ services:
     container_name: traefik-internal-redis
     networks:
       - default
-      - kop_net
+      #- kop_net
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
     volumes:
