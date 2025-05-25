@@ -23,11 +23,32 @@ services:
     extra_hosts:
       - host.docker.internal:host-gateway
     volumes:
-      - ./configs/traefik/static:/etc/traefik:z
-      - ./configs/traefik/dynamic:/config/dynamic:z
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - certs:/certs:z
-      - traefik_logs:/var/log/traefik:z # folder containing access.log file
+      - type: bind
+        source: ./configs/traefik/static
+        target: /etc/traefik
+        read_only: true
+        bind:
+          selinux: z
+          create_host_path: false
+      - type: bind
+        source: ./configs/traefik/dynamic
+        target: /config/dynamic
+        read_only: true
+        bind:
+          selinux: z
+          create_host_path: false
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
+        read_only: true
+        bind:
+          create_host_path: false
+      - type: volume
+        source: certs
+        target: /certs
+      - type: volume
+        source: traefik_logs
+        target: /var/log/traefik
     labels:
       - komodo.skip=true # Prevent Komodo from stopping with StopAllContainers
       - traefik.enable=true

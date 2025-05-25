@@ -31,7 +31,7 @@ services:
     <<: *ts-sidecar
     environment:
       <<: *ts-env
-      TS_HOSTNAME: "traefik"
+      TS_HOSTNAME: "traefik-internal"
     extra_hosts:
       - host.docker.internal=host-gateway
     ports:
