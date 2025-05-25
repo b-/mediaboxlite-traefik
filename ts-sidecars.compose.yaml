@@ -70,6 +70,7 @@ services:
     labels:
       - traefik.enable=true
       - "traefik.http.routers.whoami.rule=${TRAEFIK_RULE_PREFIX}whoami${TRAEFIK_RULE_SUFFIX}"
+      - traefik.http.services.whoami-internal.loadbalancer.server.port=80
     environment:
       <<: *ts-env
       TS_HOSTNAME: "whoami"
