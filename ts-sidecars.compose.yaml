@@ -54,9 +54,11 @@ services:
     networks: !reset null
   logdy-ts:
     <<: *ts-sidecar
+    ports:
+    - "8333:8080"
     environment:
       <<: *ts-env
-      TS_HOSTNAME: "logdy"
+      TS_HOSTNAME: "logdy-traefik-internal"
   logdy:
     network_mode: service:logdy-ts
     networks: !reset null
