@@ -23,13 +23,13 @@ services:
       #- "--full-read"
       - "/var/log/access.log"
     restart: unless-stopped
-    # ports:
-    #   - "8333:8080"
+    ports:
+      - "8333:8080"
     security_opt:
       - no-new-privileges=true
     labels:
       traefik.enable: true
-      traefik.http.routers.logdy-traefik-internal.rule: "[[OP__KOMODO__TRAEFIK__RULE_PREFIX]]traefik-internal[[OP__KOMODO__TRAEFIK__RULE_SUFFIX]]"
+      traefik.http.routers.logdy-traefik-internal.rule: "[[OP__KOMODO__TRAEFIK__RULE_PREFIX]]logdy-traefik-internal[[OP__KOMODO__TRAEFIK__RULE_SUFFIX]]"
       traefik.http.services.logdy-traefik-internal.loadbalancer.server.port: 8080
       homepage.group: Monitoring
       homepage.name: Traefik Logs (Internal)
