@@ -23,8 +23,6 @@ services:
       #- "--full-read"
       - "/var/log/access.log"
     restart: unless-stopped
-    ports:
-      - "8333:8080"
     security_opt:
       - no-new-privileges=true
     labels:
