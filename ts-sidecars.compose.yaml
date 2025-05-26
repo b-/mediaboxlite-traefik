@@ -1,3 +1,26 @@
+configs:
+  whoami_serve:
+    content: |
+      {
+          "TCP": {
+              "443": {
+                  "HTTPS": true
+              }
+          },
+          "Web": {
+              "$${TS_CERT_DOMAIN}:443": {
+                  "Handlers": {
+                      "/": {
+                          "Proxy": "http://localhost:80"
+                      }
+                  }
+              }
+          },
+          "AllowFunnel": {
+              "$${TS_CERT_DOMAIN}:443": true
+          }
+      }
+
 x-ts-sidecar: &ts-sidecar
   # volumes:
   #   - ts_state:/ts_state
@@ -70,6 +93,10 @@ services:
     environment:
       <<: *ts-env
       TS_HOSTNAME: "whoami"
+      TS_SERVE_CONFIG: /config/ts_serve.json
+    configs:
+      - source: whoami_serve
+        target: /config/ts_serve.json
   whoami:
     network_mode: service:whoami-ts
     labels: ["traefik.enable=false"]
