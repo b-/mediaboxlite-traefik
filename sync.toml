@@ -2,7 +2,7 @@
 name = "traefik-internal"
 tags = ["mediaboxlite-traefik"]
 [stack.config]
-server = "mediaboxlite"
+server = "periphery-01"
 poll_for_updates = true
 auto_update = true
 auto_update_all_services = true
