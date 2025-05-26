@@ -9,7 +9,6 @@ auto_update_all_services = true
 destroy_before_deploy = true
 git_account = "b-"
 repo = "b-/mediaboxlite-traefik"
-reclone = true
 file_paths = [
   "log-tail.compose.yaml",
   "logdy.compose.yaml",
