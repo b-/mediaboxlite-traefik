@@ -54,12 +54,14 @@ entryPoints:
       tls:
         certResolver: leresolver
         domains:
-          - main: mediaboxlite.ibeep.com
+          - main: ibeep.com
             sans:
-              - "*.mediaboxlite.ibeep.com"
-              - "*.mediaboxlite.ts.ibeep.com"
-              - "*.mediaboxlite.lan.ibeep.com"
-              - "*.mediaboxlite.home.ibeep.com"
+              - "ibeep.com"
+              - "*.ibeep.com"
+              - "*.*.ibeep.com"
+              - "*.*.*.ibeep.com"
+              #- "*.mediaboxlite.lan.ibeep.com"
+              #- "*.mediaboxlite.home.ibeep.com"
   ssh:
     address: ":222"
 certificatesResolvers:
