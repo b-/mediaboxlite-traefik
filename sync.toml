@@ -6,7 +6,6 @@ server = "traefik-host-01"
 poll_for_updates = true
 auto_update = true
 auto_update_all_services = true
-destroy_before_deploy = true
 git_account = "b-"
 repo = "b-/mediaboxlite-traefik"
 file_paths = [
