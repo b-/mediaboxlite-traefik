@@ -28,14 +28,14 @@ services:
         target: /etc/traefik/
         #read_only: true
         bind:
-          selinux: z
+          #selinux: z
           create_host_path: false
       - type: bind
         source: ./configs/traefik/dynamic/
         target: /config/dynamic/
         #read_only: true
         bind:
-          selinux: z
+          #selinux: z
           create_host_path: false
       - type: bind
         source: /var/run/docker.sock
