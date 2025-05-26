@@ -54,7 +54,7 @@ services:
       - traefik.enable=true
       - "traefik.http.routers.traefik-internal.rule=${TRAEFIK_RULE_PREFIX}traefik-internal${TRAEFIK_RULE_SUFFIX}"
       - "traefik.http.routers.traefik-internal.service=api@internal"
-      #- traefik.http.services.traefik-internal.loadbalancer.server.port=8080
+      - traefik.http.services.traefik-internal.loadbalancer.server.port=8080
       - homepage.group=Monitoring
       - homepage.name=Traefik (Internal)
       - homepage.icon=https://cdn.jsdelivr.net/gh/selfhst/icons/png/traefik.png
