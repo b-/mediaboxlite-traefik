@@ -58,10 +58,17 @@ entryPoints:
             sans:
               - "ibeep.com"
               - "*.ibeep.com"
-              - "*.*.ibeep.com"
-              - "*.*.*.ibeep.com"
-              #- "*.mediaboxlite.lan.ibeep.com"
-              #- "*.mediaboxlite.home.ibeep.com"
+              - "*.traefik-internal-01.ibeep.com"
+              - "*.traefik-internal-01.lan.ibeep.com"
+              - "*.traefik-internal-01.ts.ibeep.com"
+              - "*.traefik-internal-01.wan.ibeep.com"
+              - "*.traefik-internal-01.home.ibeep.com"
+              - "*.mediaboxlite.ibeep.com"
+              - "*.mediaboxlite.lan.ibeep.com"
+              - "*.mediaboxlite.ts.ibeep.com"
+              - "*.mediaboxlite.wan.ibeep.com"
+              - "*.mediaboxlite.lan.ibeep.com"
+              - "*.mediaboxlite.home.ibeep.com"
   ssh:
     address: ":222"
 certificatesResolvers:
