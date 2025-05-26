@@ -1,5 +1,5 @@
 [[stack]]
-name = "mediaboxlite-traefik"
+name = "traefik-internal"
 tags = ["mediaboxlite-traefik"]
 [stack.config]
 server = "mediaboxlite"
@@ -31,7 +31,7 @@ TS_AUTHKEY = [[OP__KOMODO__TAILSCALE_OP__CLIENT_SECRET]]?ephemeral=true
 ##
 
 [[resource_sync]]
-name = "mediaboxlite-traefik"
+name = "traefik-internal"
 tags = ["mediaboxlite-traefik"]
 [resource_sync.config]
 repo = "b-/mediaboxlite-traefik"
