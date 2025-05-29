@@ -86,6 +86,11 @@ services:
     network_mode: service:redisinsight-ts
     networks: !reset null
     ports: !reset null
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.redisinsight.rule: "[[OP__KOMODO__TRAEFIK__RULE_PREFIX]]redisinsight[[OP__KOMODO__TRAEFIK__RULE_SUFFIX]]"
+      traefik.http.services.redisinsight.loadbalancer.server.port: "5540"
+
   logdy-ts:
     <<: *ts-sidecar
     ports:
