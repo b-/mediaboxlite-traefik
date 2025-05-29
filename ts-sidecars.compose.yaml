@@ -75,6 +75,17 @@ services:
   traefik-internal-redis:
     network_mode: service:traefik-internal-redis-ts
     networks: !reset null
+  redisinsight-ts:
+    <<: *ts-sidecar
+    ports:
+        - 5540:5540
+    environment:
+      <<: *ts-env
+      TS_HOSTNAME: "redisinsight"
+  redisinsight:
+    network_mode: service:redisinsight-ts
+    networks: !reset null
+    ports: !reset null
   logdy-ts:
     <<: *ts-sidecar
     ports:
