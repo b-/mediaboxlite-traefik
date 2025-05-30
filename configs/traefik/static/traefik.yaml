@@ -14,7 +14,7 @@ accessLog:
         User-Agent: keep # log user agent strings
 log:
   # format: json
-  level: INFO
+  level: DEBUG
 metrics:
   prometheus:
     buckets:
