@@ -26,12 +26,26 @@ api:
   dashboard: true
   insecure: true
   debug: false
+http:
+  routers:
+    idracRouter:
+      rule: HostRegexp(`idrac\..*$`)
+      service: idracService
+    middlewares:
+      - security-headers@file
+      - rate-limit@file
+  services:
+    idracService:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.1.201"
 providers:
   docker:
     exposedByDefault: false
   redis:
     endpoints:
       - traefik-internal-redis:6379
+      - traefik-internal-redis.ts.shark-perch.net:6379
   file:
     directory: "/config/dynamic"
     watch: true
